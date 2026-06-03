@@ -11,40 +11,40 @@ const vazir = Vazirmatn({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Fotury | تاریخ فوتبال جهان',
-    template: '%s | Fotury',
+    default: 'Futory | تاریخ فوتبال جهان',
+    template: '%s | Futory',
   },
 
   description:
     'مرجع تاریخ فوتبال، جام جهانی، اسطوره‌ها و داستان‌های فراموش‌نشدنی فوتبال',
 
   metadataBase: new URL(
-    'https://fotury.ir'
+    'https://Futory.ir'
   ),
 }
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
 
-  name: "Fotury",
+  name: "Futory",
 
-  url: "https://fotury.ir",
+  url: "https://Futory.ir",
 
-  logo: "https://fotury.ir/logo.png",
+  logo: "https://Futory.ir/logo.png",
 }
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
 
-  name: "Fotury",
+  name: "Futory",
   alternateName: "تاریخچه فوتبال",
 
-  url: "https://fotury.ir",
+  url: "https://Futory.ir",
 
   potentialAction: {
     "@type": "SearchAction",
     target:
-      "https://fotury.ir/search?q={search_term_string}",
+      "https://Futory.ir/search?q={search_term_string}",
     "query-input":
       "required name=search_term_string",
   },

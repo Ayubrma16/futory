@@ -43,9 +43,9 @@ export async function GET() {
 
 <channel>
 
-<title>Fotury</title>
+<title>futory</title>
 
-<link>https://fotury.com</link>
+<link>https://futory.com</link>
 
 <description>
 تاریخ فوتبال جهان
@@ -61,7 +61,7 @@ ${article.title}
 </title>
 
 <link>
-https://fotury.com/articles/${article.slug}
+https://futory.com/articles/${article.slug}
 </link>
 
 <description>

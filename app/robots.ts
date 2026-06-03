@@ -10,10 +10,10 @@ export default function robots(): MetadataRoute.Robots {
     },
 
     sitemap:
-      'https://fotury.com/sitemap.xml',
+      'https://futory.ir/sitemap.xml',
 
     host:
-      'https://fotury.com',
+      'https://futory.ir/',
 
   }
 

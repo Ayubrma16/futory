@@ -48,7 +48,7 @@ export async function generateMetadata(
 
   if (!fs.existsSync(fullPath)) {
     return {
-      title: 'مقاله پیدا نشد | Fotury',
+      title: 'مقاله پیدا نشد | futory',
     }
   }
 
@@ -128,7 +128,7 @@ const relatedArticles = getArticles()
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://fotury.ir";
+  "https://futory.ir";
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -157,28 +157,28 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "خانه",
-      item: "https://fotury.ir",
+      item: "https://futory.ir",
     },
 
     {
       "@type": "ListItem",
       position: 2,
       name: "مقالات",
-      item: "https://fotury.ir/articles",
+      item: "https://futory.ir/articles",
     },
 
     {
       "@type": "ListItem",
       position: 3,
       name: article.category,
-      item: `https://fotury.ir/articles/category/${article.categorySlug}`,
+      item: `https://futory.ir/articles/category/${article.categorySlug}`,
     },
 
     {
       "@type": "ListItem",
       position: 4,
       name: article.title,
-      item: `https://fotury.ir/articles/${slug}`,
+      item: `https://futory.ir/articles/${slug}`,
     },
   ],
 }

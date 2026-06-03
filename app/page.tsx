@@ -243,7 +243,7 @@ export default function HomePage() {
               </h2>
 
               <p className="text-zinc-500 mt-4 text-lg">
-                جدیدترین داستان‌ها و تحلیل‌های فوتبالی Fotury
+                جدیدترین داستان‌ها و تحلیل‌های فوتبالی Futory
               </p>
 
             </div>
@@ -382,7 +382,7 @@ export default function HomePage() {
             </h2>
 
             <p className="text-zinc-500 mt-3">
-              داغ‌ترین داستان‌های فوتبالی Fotury
+              داغ‌ترین داستان‌های فوتبالی Futory
             </p>
 
           </div>
@@ -411,7 +411,7 @@ export default function HomePage() {
                       </h3>
 
                       <p className="text-zinc-500 mt-3 leading-8">
-                        یکی از محبوب‌ترین مقالات این هفته در Fotury.
+                        یکی از محبوب‌ترین مقالات این هفته در Futory.
                       </p>
 
                     </div>

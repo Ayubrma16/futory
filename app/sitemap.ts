@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const slug = file.replace('.md', '')
 
 return {
-  url: `https://fotury.com/articles/${slug}`,
+  url: `https://futory.ir/articles/${slug}`,
   lastModified: new Date(),
   changeFrequency: 'weekly' as const,
   priority: 0.8,
@@ -30,14 +30,14 @@ return {
   return [
 
     {
-      url: 'https://fotury.com',
+      url: 'https://futory.ir',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
 
     {
-      url: 'https://fotury.com/articles',
+      url: 'https://futory.ir/articles',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
