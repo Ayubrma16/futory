@@ -9,7 +9,7 @@ image: "/images/brazil-1970-world-cup.jpg"
 category: "تاریخ فوتبال"
 categorySlug: "football-history"
 
-featured: false
+featured: true
 
 date: "2026-06-04"
 
