@@ -6,6 +6,8 @@ category: "باشگاهی"
 categorySlug: "club-history"
 date: "2025-07-15"
 author: "Fotury"
+featured: true
+hero: false
 keywords:
   - مارادونا
   - جام جهانی 1986

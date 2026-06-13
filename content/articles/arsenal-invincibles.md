@@ -4,7 +4,8 @@ desc: "در تاریخ لیگ برتر انگلیس، تیم‌های بزرگی
 image: "/images/arsenal-invincibles.jpg"
 category: "باشگاهی"
 categorySlug: "club-history"
-featured: true
+featured: false
+hero: false
 date: "2025-07-15"
 author: "Fotury"
 keywords:

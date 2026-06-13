@@ -5,6 +5,7 @@ image: "/images/spain-2010.jpg"
 category: "جام جهانی (World Cup)"
 categorySlug: "world-cup"
 featured: true
+hero: true
 date: "2025-07-15"
 author: "Fotury"
 keywords:

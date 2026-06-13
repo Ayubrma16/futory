@@ -25,26 +25,20 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-
-  name: "Futory",
-
-  url: "https://Futory.ir",
-
-  logo: "https://Futory.ir/logo.png",
+  name: "futory",
+  url: "https://futory.ir",
+  logo: "https://futory.ir/logo.png",
 }
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-
-  name: "Futory",
+  name: "futory",
   alternateName: "تاریخچه فوتبال",
-
-  url: "https://Futory.ir",
-
+  url: "https://futory.ir",
   potentialAction: {
     "@type": "SearchAction",
     target:
-      "https://Futory.ir/search?q={search_term_string}",
+      "https://futory.ir/search?q={search_term_string}",
     "query-input":
       "required name=search_term_string",
   },

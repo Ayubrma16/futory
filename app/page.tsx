@@ -1,13 +1,15 @@
 import HeroSlider from '@/components/HeroSlider'
 import Link from 'next/link'
 import Image from 'next/image'
+import { quotes } from '@/data/quotes'
+import {
+  getArticles,
+  getFeaturedArticles
+} from '@/lib/articles'
 import {
   toPersianNumber,
   toPersianDate,
 } from '@/lib/persian'
-import {
-  getFeaturedArticles,
-} from '@/lib/articles'
 const slides = [
   {
     title: 'جام جهانی 1970؛ تولد فوتبال مدرن',
@@ -106,86 +108,68 @@ const tags = [
 ]
 export default function HomePage() {
 
-  const featuredArticles = getFeaturedArticles()
+  const randomQuote =
+  quotes[Math.floor(Math.random() * quotes.length)]
+  const latestArticles = getArticles()
+  .filter(article => !article.featured)
+  .slice(0, 6)
 
+  const heroArticle = latestArticles[0]
+
+  const sideArticles = latestArticles.slice(1, 6)
+
+const featuredArticles =
+  getFeaturedArticles().slice(0, 6)
+const sliderArticles =
+  getFeaturedArticles().slice(0, 5)
   return (
     <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors duration-300">
 
-      {/* HERO */}
-      <section className="max-w-7xl mx-auto px-6 py-10">
+{/* HERO */}
 
-        <div className="grid lg:grid-cols-3 gap-6">
+<section className="max-w-7xl mx-auto px-6 py-10">
 
-{/* SLIDER */}
-<div className="lg:col-span-2">
+  <div className="grid lg:grid-cols-3 gap-8">
 
-  <HeroSlider />
+    {/* HERO SLIDER */}
+    <div className="lg:col-span-2">
+
+      <HeroSlider slides={sliderArticles} />
+
+    </div>
+
+{/* FOOTBALL QUOTE */}
+<div className="h-full bg-gradient-to-br from-green-700 to-green-500 rounded-[32px] p-8 text-white flex flex-col">
+
+  <div className="flex items-center justify-between mb-8">
+
+    <h2 className="text-2xl font-black">
+      سخن بزرگان فوتبال
+    </h2>
+
+    <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
+      LEGENDS
+    </span>
+
+  </div>
+
+  <div className="bg-white/10 backdrop-blur rounded-3xl p-8 flex-1 flex flex-col justify-center">
+
+    <p className="text-xl leading-10 font-medium">
+      «{randomQuote.text}»
+    </p>
+
+    <div className="mt-8 text-2xl font-black">
+      {randomQuote.author}
+    </div>
+
+  </div>
 
 </div>
 
-          {/* LIVE SCORES */}
-          <div className="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[32px] p-6">
+  </div>
 
-            <div className="flex items-center justify-between mb-8">
-
-              <h2 className="text-2xl font-black text-zinc-900 dark:text-white">
-                نتایج زنده
-              </h2>
-
-              <span className="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                LIVE
-              </span>
-
-            </div>
-
-            <div className="space-y-4">
-
-              {liveMatches.map((match) => (
-
-                <div
-                  key={match.home}
-                  className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4"
-                >
-
-                  <div className="flex items-center justify-between">
-
-                    <div>
-
-                      <h3 className="font-bold text-zinc-900 dark:text-white">
-                        {toPersianNumber(match.home)}
-                      </h3>
-
-                      <p className="text-zinc-500 text-sm mt-1">
-                        {toPersianNumber(match.away)}
-                      </p>
-
-                    </div>
-
-                    <div className="text-left">
-
-                      <div className="text-2xl font-black text-green-700">
-                        {toPersianNumber(match.score)}
-                      </div>
-
-                      <div className="text-sm text-red-500 font-bold">
-                        {toPersianNumber(match.minute)}
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+</section>
 
       {/* CATEGORIES */}
       <section className="max-w-7xl mx-auto px-6 pb-20">
@@ -230,89 +214,117 @@ export default function HomePage() {
       </section>
 
       {/* LATEST ARTICLES */}
-      <section className="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800 py-28">
+<section className="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800 py-28">
 
-        <div className="max-w-7xl mx-auto px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
-          <div className="flex items-center justify-between mb-16">
+    <div className="flex items-center justify-between mb-16">
 
-            <div>
+      <div>
 
-              <h2 className="text-5xl font-black">
-                آخرین مقالات
-              </h2>
+        <h2 className="text-5xl font-black">
+          آخرین مقالات
+        </h2>
 
-              <p className="text-zinc-500 mt-4 text-lg">
-                جدیدترین داستان‌ها و تحلیل‌های فوتبالی Futory
+        <p className="text-zinc-500 mt-4 text-lg">
+          جدیدترین داستان‌ها و تحلیل‌های فوتبالی Futory
+        </p>
+
+      </div>
+
+    </div>
+
+    <div className="grid lg:grid-cols-3 gap-8 items-start">
+
+      {/* Hero Article */}
+      <div className="lg:col-span-2">
+
+        <Link href={`/articles/${heroArticle.slug}`}>
+
+          <div className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[40px] overflow-hidden hover:border-green-600 transition">
+
+            <div className="relative h-[420px]">
+
+              <Image
+                src={heroArticle.image}
+                alt={heroArticle.title}
+                fill
+                className="object-cover"
+              />
+
+            </div>
+
+            <div className="p-10">
+
+              <div className="text-sm text-zinc-500 mb-4">
+                {heroArticle.category}
+              </div>
+
+              <h3 className="text-4xl font-black leading-tight mb-6 group-hover:text-green-700 transition">
+                {heroArticle.title}
+              </h3>
+
+              <p className="text-zinc-600 dark:text-zinc-400 leading-9 text-lg">
+                {heroArticle.desc}
               </p>
 
             </div>
 
           </div>
 
-         <div className="grid lg:grid-cols-3 gap-8 items-start">
+        </Link>
 
-            <div className="lg:col-span-2 group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[40px] overflow-hidden hover:border-green-600 transition">
+      </div>
 
-              <div className="h-[420px] bg-gradient-to-br from-green-700 to-green-500 relative" />
+      {/* Side Articles */}
+      <div className="space-y-6">
 
-              <div className="p-10">
+        {latestArticles.slice(1, 5).map((article) => (
 
-                <h3 className="text-4xl font-black leading-tight mb-6 group-hover:text-green-700 transition">
-                  چرا جام جهانی ۱۹۷۰ آغاز فوتبال مدرن بود؟
-                </h3>
+          <Link
+            key={article.slug}
+            href={`/articles/${article.slug}`}
+          >
 
-                <p className="text-zinc-600 dark:text-zinc-400 leading-9 text-lg">
-                  بررسی کامل تیم افسانه‌ای برزیل، نقش پله و تأثیر این جام جهانی بر فوتبال مدرن.
-                </p>
+            <div className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 hover:border-green-600 transition cursor-pointer">
+
+              <div className="flex gap-5">
+
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  width={112}
+                  height={112}
+                  className="w-28 h-28 rounded-2xl object-cover"
+                />
+
+                <div>
+
+                  <div className="text-sm text-zinc-500 mb-3">
+                    {article.category}
+                  </div>
+
+                  <h3 className="font-black text-lg leading-8 group-hover:text-green-700 transition">
+                    {article.title}
+                  </h3>
+
+                </div>
 
               </div>
 
             </div>
 
-            <div className="space-y-6">
+          </Link>
 
-              {[
-                'زیدان چگونه فرانسه را قهرمان جهان کرد؟',
-                'تاکتیک توتال فوتبال آژاکس',
-                'شب تاریخی لیورپول در استانبول',
-                'افسانه شکست‌ناپذیر آرسنال',
-              ].map((article) => (
+        ))}
 
-                <div
-                  key={article}
-                  className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 hover:border-green-600 transition cursor-pointer"
-                >
+      </div>
 
-                  <div className="flex gap-5">
+    </div>
 
-                    <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-green-700 to-green-500 shrink-0" />
+  </div>
 
-                    <div>
-
-                      <div className="text-sm text-zinc-500 mb-3">
-                        تاریخ فوتبال
-                      </div>
-
-                      <h3 className="font-black text-lg leading-8 group-hover:text-green-700 transition">
-                        {article}
-                      </h3>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
+</section>
 
       {/* TIMELINE */}
       <section className="max-w-6xl mx-auto px-6 py-28">

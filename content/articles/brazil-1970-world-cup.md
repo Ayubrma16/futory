@@ -10,6 +10,7 @@ category: "تاریخ فوتبال"
 categorySlug: "football-history"
 
 featured: true
+hero: true
 
 date: "2026-06-04"
 
