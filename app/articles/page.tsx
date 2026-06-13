@@ -18,7 +18,7 @@ export default function ArticlesPage() {
       {/* HERO */}
       <section className="border-b border-zinc-200 dark:border-zinc-800">
 
-        <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
 
           <div className="max-w-3xl">
 
@@ -47,7 +47,7 @@ export default function ArticlesPage() {
       </section>
 
 {/* ARTICLES SEARCH + GRID */}
-<section className="max-w-7xl mx-auto px-6 py-20">
+<section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
 
   <ArticlesSearch articles={articles} />
 

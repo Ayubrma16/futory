@@ -29,7 +29,7 @@ export default async function CategoryPage({
 
     <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white">
 
-      <section className="max-w-7xl mx-auto px-6 py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
 
         <h1 className="text-5xl font-black mb-4">
 

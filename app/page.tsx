@@ -129,7 +129,7 @@ const sliderArticles =
 
 <section className="max-w-7xl mx-auto px-6 py-10">
 
-  <div className="grid lg:grid-cols-3 gap-8">
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
 
     {/* HERO SLIDER */}
     <div className="lg:col-span-2">
@@ -143,7 +143,7 @@ const sliderArticles =
 
   <div className="flex items-center justify-between mb-8">
 
-    <h2 className="text-2xl font-black">
+    <h2 className="text-xl lg:text-2xl font-black">
       سخن بزرگان فوتبال
     </h2>
 
@@ -155,7 +155,7 @@ const sliderArticles =
 
   <div className="bg-white/10 backdrop-blur rounded-3xl p-8 flex-1 flex flex-col justify-center">
 
-    <p className="text-xl leading-10 font-medium">
+    <p className="text-lg lg:text-xl leading-9 lg:leading-10 font-medium">
       «{randomQuote.text}»
     </p>
 
@@ -176,7 +176,7 @@ const sliderArticles =
 
         <div className="mb-10">
 
-          <h2 className="text-4xl font-black">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
             دسته‌بندی مقالات
           </h2>
 
@@ -222,7 +222,7 @@ const sliderArticles =
 
       <div>
 
-        <h2 className="text-5xl font-black">
+        <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black">
           آخرین مقالات
         </h2>
 
@@ -243,7 +243,7 @@ const sliderArticles =
 
           <div className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[40px] overflow-hidden hover:border-green-600 transition">
 
-            <div className="relative h-[420px]">
+            <div className="relative h-[240px] sm:h-[320px] lg:h-[420px]">
 
               <Image
                 src={heroArticle.image}
@@ -260,7 +260,7 @@ const sliderArticles =
                 {heroArticle.category}
               </div>
 
-              <h3 className="text-4xl font-black leading-tight mb-6 group-hover:text-green-700 transition">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight mb-6 group-hover:text-green-700 transition">
                 {heroArticle.title}
               </h3>
 
@@ -331,7 +331,7 @@ const sliderArticles =
 
         <div className="text-center mb-20">
 
-          <h2 className="text-5xl font-black">
+          <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black">
             تاریخ فوتبال جهان
           </h2>
 
@@ -389,7 +389,7 @@ const sliderArticles =
 
           <div className="mb-14">
 
-            <h2 className="text-4xl font-black">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
               ترندهای فوتبالی
             </h2>
 
@@ -412,7 +412,7 @@ const sliderArticles =
 
                   <div className="flex items-start gap-6">
 
-                    <div className="text-5xl font-black text-zinc-200 group-hover:text-green-600 transition">
+                    <div className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black text-zinc-200 group-hover:text-green-600 transition">
                       0{index + 1}
                     </div>
 
@@ -480,7 +480,7 @@ const sliderArticles =
         داستان‌های ویژه
       </span>
 
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black mt-3 text-zinc-900 dark:text-white leading-tight">
+      <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black mt-3 text-zinc-900 dark:text-white leading-tight">
 
         مقالات منتخب
 
@@ -584,7 +584,7 @@ const sliderArticles =
   </div>
 
 </section>
-```
+
 
 
     </main>

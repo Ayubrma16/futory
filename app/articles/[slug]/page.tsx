@@ -221,7 +221,7 @@ return (
 
     <div className="relative z-10 h-full flex items-end">
 
-      <div className="max-w-6xl mx-auto w-full px-6 pb-10 lg:pb-20">
+      <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 pb-10 lg:pb-20">
 
 <div className="max-w-4xl">
 
@@ -307,7 +307,7 @@ return (
   </section>
 
   {/* ARTICLE CONTENT */}
-  <section className="max-w-4xl mx-auto px-6 py-14 lg:py-24">
+  <section className="max-w-4xl mx-auto px-4 sm:px-6 py-14 lg:py-24">
 
     <article
       className="
@@ -329,7 +329,7 @@ return (
 
   </section>
 {article.faq && article.faq.length > 0 && (
-  <section className="max-w-4xl mx-auto px-6 pb-16">
+  <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
     <h2 className="text-3xl font-black mb-8">
       سوالات متداول
     </h2>
@@ -357,7 +357,7 @@ return (
 
     <section className="border-t border-zinc-200 dark:border-zinc-800 py-24">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         <div className="mb-14">
 
