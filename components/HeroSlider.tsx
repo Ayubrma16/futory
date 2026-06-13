@@ -30,7 +30,7 @@ export default function HeroSlider({
         clickable: true,
       }}
       loop
-      className="h-full min-h-[650px] rounded-[40px] overflow-hidden"
+      className="h-full min-h-[350px] rounded-[40px] overflow-hidden"
     >
       {slides.map((slide) => (
         <SwiperSlide key={slide.slug}>
