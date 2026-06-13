@@ -140,7 +140,7 @@ export default function Navbar() {
 
         <div className="lg:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
 
-          <div className="px-6 py-6 flex flex-col gap-5">
+          <div className="px-4 sm:px-6 py-6 flex flex-col gap-5">
 
             {navItems.map((item) => (
 

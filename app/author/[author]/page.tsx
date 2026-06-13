@@ -19,7 +19,7 @@ export default async function AuthorPage({
   )
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-20">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-20">
 
       <h1 className="text-5xl font-black mb-4">
         {author}

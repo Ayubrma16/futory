@@ -29,7 +29,7 @@ export default async function SearchPage({
 
   return (
 
-    <main className="max-w-6xl mx-auto px-6 py-20">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
 
       <h1 className="text-5xl font-black mb-10">
 
@@ -49,7 +49,7 @@ export default async function SearchPage({
             border-zinc-300
             dark:border-zinc-700
             rounded-2xl
-            px-6
+            px-4 sm:px-6
             py-4
             bg-transparent
           "
