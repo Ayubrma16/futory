@@ -1,68 +1,74 @@
 'use client'
 
-import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-type Slide = {
+import Image from 'next/image'
+import Link from 'next/link'
+
+export type Article = {
+  slug: string
   title: string
   desc: string
   image: string
-  slug: string
+  category: string
+  date: string
+  author: string
+  categorySlug: string
+  featured?: boolean
 }
 
-export default function HeroSlider({
-  slides,
-}: {
-  slides: Slide[]
-}) {
+type Props = {
+  articles: Article[]
+}
+
+export default function HeroSlider({ articles }: Props) {
   return (
     <Swiper
       modules={[Autoplay, Pagination]}
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-      }}
-      loop
-      className="h-full min-h-[350px] rounded-[40px] overflow-hidden"
+      autoplay={{ delay: 4000 }}
+      pagination={{ clickable: true }}
+      loop={true}
+      className="rounded-[40px] overflow-hidden"
     >
-      {slides.map((slide) => (
-        <SwiperSlide key={slide.slug}>
-          <div
-            className="relative h-full bg-cover bg-center flex items-end"
-            style={{
-              backgroundImage: `url(${slide.image})`,
-            }}
-          >
-            <div className="absolute inset-0 bg-black/50" />
+      {articles.map((article) => (
+        <SwiperSlide key={article.slug}>
+          <Link href={`/articles/${article.slug}`}>
+            <div className="relative h-[420px] group">
 
-            <div className="relative z-10 p-8 md:p-12 lg:p-16 text-white max-w-3xl">
-              <span className="inline-flex bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold">
-                مقاله ویژه
-              </span>
+              {/* IMAGE */}
+              <Image
+                src={article.image}
+                alt={article.title}
+                fill
+                className="object-cover group-hover:scale-105 transition duration-700"
+              />
 
-              <h2 className="mt-6 text-3xl md:text-5xl lg:text-6xl font-black leading-tight">
-                {slide.title}
-              </h2>
+              {/* GRADIENT */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-              <p className="mt-6 text-lg leading-8 text-white/90">
-                {slide.desc}
-              </p>
+              {/* TEXT */}
+              <div className="absolute bottom-0 p-8 text-white">
 
-              <Link
-                href={`/articles/${slide.slug}`}
-                className="inline-flex mt-8 bg-white text-green-700 px-8 py-4 rounded-2xl font-black hover:scale-105 transition"
-              >
-                مطالعه مقاله
-              </Link>
+                <span className="bg-green-600 text-xs px-3 py-1 rounded-full">
+                  مقاله ویژه
+                </span>
+
+                <h2 className="text-3xl font-black mt-4 leading-tight">
+                  {article.title}
+                </h2>
+
+                <p className="text-zinc-200 mt-3 line-clamp-2">
+                  {article.desc}
+                </p>
+
+              </div>
+
             </div>
-          </div>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>

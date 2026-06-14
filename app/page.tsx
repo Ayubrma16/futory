@@ -1,5 +1,6 @@
-import HeroSlider from '@/components/HeroSlider'
+import { categories } from '@/data/categories'
 import Link from 'next/link'
+import HeroSlider from '@/components/HeroSlider'
 import Image from 'next/image'
 import { quotes } from '@/data/quotes'
 import {
@@ -44,16 +45,6 @@ const liveMatches = [
     minute: "55'",
   },
 ]
-
-const categories = [
-  'جام جهانی',
-  'اسطوره‌ها',
-  'باشگاه‌ها',
-  'مسابقات کلاسیک',
-  'تاریخ فوتبال',
-  'تاکتیک‌ها',
-]
-
 const timeline = [
   {
     year: '1930',
@@ -134,7 +125,7 @@ const sliderArticles =
     {/* HERO SLIDER */}
     <div className="lg:col-span-2">
 
-      <HeroSlider slides={sliderArticles} />
+      <HeroSlider articles={latestArticles.slice(0, 3)} />
 
     </div>
 
@@ -171,47 +162,57 @@ const sliderArticles =
 
 </section>
 
-      {/* CATEGORIES */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
+{/* CATEGORIES */}
+<section className="max-w-7xl mx-auto px-6 py-16">
 
-        <div className="mb-10">
+  <div className="flex items-center justify-between mb-10">
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
-            دسته‌بندی مقالات
-          </h2>
+    <h2 className="text-3xl font-black">
+      دسته‌بندی مقالات
+    </h2>
 
-          <p className="text-zinc-500 mt-3">
-            مهم‌ترین بخش‌های تاریخ فوتبال
-          </p>
+    <span className="text-sm text-zinc-500">
+      همه موضوعات فوتبالی
+    </span>
+
+  </div>
+
+  {/* GRID */}
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+
+    {categories.map((cat) => (
+
+      <Link
+        key={cat.slug}
+        href={`/articles/category/${cat.slug}`}
+      >
+
+        <div className={`group relative overflow-hidden rounded-3xl p-6 text-white bg-gradient-to-br ${cat.color} hover:scale-[1.03] transition` }>
+
+          {/* glow effect */}
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition" />
+
+          <div className="relative z-10">
+
+            <h3 className="font-black text-lg mb-2">
+              {cat.title}
+            </h3>
+
+            <p className="text-sm opacity-80">
+              مشاهده مقالات
+            </p>
+
+          </div>
 
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+      </Link>
 
-          {categories.map((category) => (
+    ))}
 
-            <div
-              key={category}
-              className="group bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600 rounded-3xl p-6 transition cursor-pointer"
-            >
+  </div>
 
-              <div className="w-14 h-14 rounded-2xl bg-green-100 dark:bg-green-950/40 flex items-center justify-center text-2xl mb-5 group-hover:bg-green-600 group-hover:text-white transition">
-
-                ⚽
-
-              </div>
-
-              <h3 className="font-black text-lg group-hover:text-green-700 transition">
-                {category}
-              </h3>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
+</section>
 
       {/* LATEST ARTICLES */}
 <section className="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800 py-28">
@@ -382,90 +383,65 @@ const sliderArticles =
 
       </section>
 
-      {/* TRENDING */}
-      <section className="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800 py-24">
+{/* TRENDING SECTION */}
+<section className="max-w-7xl mx-auto px-6 py-16">
 
-        <div className="max-w-7xl mx-auto px-6">
+  <div className="flex items-center justify-between mb-8">
 
-          <div className="mb-14">
+    <h2 className="text-3xl font-black">
+      🔥 داغ‌ترین مطالب
+    </h2>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black">
-              ترندهای فوتبالی
-            </h2>
+    <span className="text-sm text-zinc-500">
+      اسکرول کنید →
+    </span>
 
-            <p className="text-zinc-500 mt-3">
-              داغ‌ترین داستان‌های فوتبالی Futory
-            </p>
+  </div>
 
+  {/* SCROLL CONTAINER */}
+  <div className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
+
+    {trending.map((item, index) => (
+
+      <div
+        key={index}
+        className="min-w-[300px] snap-start group"
+      >
+
+        <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 hover:border-green-600 transition h-full">
+
+          {/* NUMBER */}
+          <div className="text-green-600 font-black text-sm mb-4">
+            #{index + 1}
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-10">
+          {/* TITLE */}
+          <h3 className="font-bold text-lg leading-8 group-hover:text-green-600 transition">
+            {item}
+          </h3>
 
-            <div className="lg:col-span-2 space-y-6">
+          {/* FAKE TAGS */}
+          <div className="mt-4 flex gap-2 flex-wrap">
 
-              {trending.map((item, index) => (
+            <span className="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+              فوتبال
+            </span>
 
-                <div
-                  key={item}
-                  className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 hover:border-green-600 rounded-3xl p-6 transition cursor-pointer"
-                >
-
-                  <div className="flex items-start gap-6">
-
-                    <div className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black text-zinc-200 group-hover:text-green-600 transition">
-                      0{index + 1}
-                    </div>
-
-                    <div>
-
-                      <h3 className="text-2xl font-black leading-tight group-hover:text-green-700 transition">
-                        {item}
-                      </h3>
-
-                      <p className="text-zinc-500 mt-3 leading-8">
-                        یکی از محبوب‌ترین مقالات این هفته در Futory.
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-            <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[32px] p-8 h-fit">
-
-              <h3 className="text-2xl font-black mb-8">
-                موضوعات داغ
-              </h3>
-
-              <div className="flex flex-wrap gap-4">
-
-                {tags.map((tag) => (
-
-                  <div
-                    key={tag}
-                    className="px-5 py-3 rounded-2xl bg-green-50 dark:bg-green-950/40 text-green-700 dark:text-green-400 border border-green-100 dark:border-green-900 hover:bg-green-700 hover:text-white transition cursor-pointer font-medium"
-                  >
-
-                    #{tag}
-
-                  </div>
-
-                ))}
-
-              </div>
-
-            </div>
+            <span className="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
+              تحلیل
+            </span>
 
           </div>
 
         </div>
 
-      </section>
+      </div>
+
+    ))}
+
+  </div>
+
+</section>
 
 
 {/* FEATURED ARTICLES */}

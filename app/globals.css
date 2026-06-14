@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
+
 /* DARK MODE */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -10,7 +10,12 @@
 
 .dark {
   --background: #09090b;
-  --foreground: #ededed;
+  --foreground: #fafafa;
+}
+
+/* BASE RESET */
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -24,21 +29,23 @@ body {
   color: var(--foreground);
   min-height: 100vh;
   overflow-x: hidden;
-
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  margin: 0;
 }
 
-/* تصاویر */
+/* images */
 img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* اسکرول بار */
+/* scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -46,11 +53,30 @@ img {
   border-radius: 999px;
 }
 
-/* SWIPER */
+/* swiper fix */
 .swiper {
   width: 100%;
+  height: 100%;
 }
 
 .swiper-slide {
   height: auto;
+}
+
+.swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  background: #22c55e !important;
+  opacity: 1;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
