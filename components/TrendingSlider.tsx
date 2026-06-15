@@ -63,17 +63,14 @@ export default function TrendingSlider({ articles }: Props) {
           prevEl: prevRef.current,
           nextEl: nextRef.current,
         }}
-        onBeforeInit={(swiper) => {
-          swiper.params.navigation.prevEl = prevRef.current
-          swiper.params.navigation.nextEl = nextRef.current
-        }}
-        spaceBetween={20}
-        slidesPerView={3}
-        breakpoints={{
-          0: { slidesPerView: 1.1 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
+onBeforeInit={(swiper) => {
+  const navigation = swiper.params.navigation
+
+  if (navigation && typeof navigation === "object") {
+    navigation.prevEl = prevRef.current
+    navigation.nextEl = nextRef.current
+  }
+}}
       >
         {articles.map((article, index) => (
           <SwiperSlide key={article.slug}>
