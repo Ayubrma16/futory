@@ -10,9 +10,22 @@ import { Autoplay, Navigation } from "swiper/modules"
 import "swiper/css"
 import "swiper/css/navigation"
 
-export default function TrendingSlider({ articles }) {
-  const prevRef = useRef(null)
-  const nextRef = useRef(null)
+type Article = {
+  slug: string
+  title: string
+  desc: string
+  image: string
+  views?: number
+  date?: string
+}
+
+type Props = {
+  articles: Article[]
+}
+
+export default function TrendingSlider({ articles }: Props) {
+  const prevRef = useRef<HTMLButtonElement | null>(null)
+  const nextRef = useRef<HTMLButtonElement | null>(null)
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 relative">
@@ -26,14 +39,14 @@ export default function TrendingSlider({ articles }) {
       {/* ARROWS */}
       <button
         ref={prevRef}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 bg-white dark:bg-zinc-900 border rounded-full w-10 h-10"
+        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full border bg-white dark:bg-zinc-900"
       >
         ←
       </button>
 
       <button
         ref={nextRef}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 bg-white dark:bg-zinc-900 border rounded-full w-10 h-10"
+        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full border bg-white dark:bg-zinc-900"
       >
         →
       </button>
@@ -61,19 +74,17 @@ export default function TrendingSlider({ articles }) {
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        className="pb-6"
       >
         {articles.map((article, index) => (
           <SwiperSlide key={article.slug}>
-            
             <Link href={`/articles/${article.slug}`}>
               <div
-                className={`
-                  p-6 rounded-3xl border transition relative
-                  ${index === 0 ? "border-green-500 shadow-lg scale-[1.02]" : "border-zinc-200 dark:border-zinc-800"}
-                `}
+                className={`p-6 rounded-3xl border transition ${
+                  index === 0
+                    ? "border-green-500 shadow-md scale-[1.03]"
+                    : "border-zinc-200 dark:border-zinc-800"
+                }`}
               >
-                {/* badge */}
                 <div className="text-green-600 font-black text-sm mb-3">
                   🔥 {article.views || 0} بازدید
                 </div>
@@ -87,14 +98,13 @@ export default function TrendingSlider({ articles }) {
                 </p>
               </div>
             </Link>
-
           </SwiperSlide>
         ))}
       </Swiper>
 
       {/* EDGE BLUR */}
-      <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white dark:from-zinc-950 to-transparent pointer-events-none" />
-      <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white dark:from-zinc-950 to-transparent pointer-events-none" />
+      <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white dark:from-zinc-950 pointer-events-none" />
+      <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white dark:from-zinc-950 pointer-events-none" />
 
     </section>
   )
