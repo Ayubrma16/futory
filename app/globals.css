@@ -1,8 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-/* DARK MODE */
-@custom-variant dark (&:where(.dark, .dark *));
-
+/* =========================
+   DARK MODE VARIABLES
+========================= */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -13,7 +17,9 @@
   --foreground: #fafafa;
 }
 
-/* BASE RESET */
+/* =========================
+   BASE RESET (SAFE)
+========================= */
 * {
   box-sizing: border-box;
 }
@@ -24,22 +30,56 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
+
   direction: rtl;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--foreground);
+
   min-height: 100vh;
   overflow-x: hidden;
-  margin: 0;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Vazirmatn", sans-serif;
+
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* images */
+/* =========================
+   IMAGES SAFE
+========================= */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* scrollbar */
+/* =========================
+   SWIPER (SAFE FIX)
+========================= */
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  height: auto;
+}
+
+/* pagination */
+.swiper-pagination-bullet {
+  background: #ffffff !important;
+  opacity: 0.4;
+}
+
+.swiper-pagination-bullet-active {
+  background: #22c55e !important;
+  opacity: 1;
+}
+
+/* =========================
+   SCROLLBAR (CLEAN UI)
+========================= */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -53,25 +93,13 @@ img {
   border-radius: 999px;
 }
 
-/* swiper fix */
-.swiper {
-  width: 100%;
-  height: 100%;
+::-webkit-scrollbar-thumb:hover {
+  background: #22c55e;
 }
 
-.swiper-slide {
-  height: auto;
-}
-
-.swiper-pagination-bullet {
-  background: white !important;
-  opacity: 0.4;
-}
-
-.swiper-pagination-bullet-active {
-  background: #22c55e !important;
-  opacity: 1;
-}
+/* =========================
+   UTILITIES
+========================= */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -3,48 +3,13 @@ import Link from 'next/link'
 import HeroSlider from '@/components/HeroSlider'
 import Image from 'next/image'
 import { quotes } from '@/data/quotes'
-import {
-  getArticles,
-  getFeaturedArticles
-} from '@/lib/articles'
+import TrendingSlider from "@/components/TrendingSlider"
+import { getArticles, getFeaturedArticles } from "@/lib/articles"
+import { getTrendingArticles } from "@/lib/trending"
 import {
   toPersianNumber,
   toPersianDate,
 } from '@/lib/persian'
-const slides = [
-  {
-    title: 'جام جهانی 1970؛ تولد فوتبال مدرن',
-    desc: 'برزیل پله یکی از بهترین تیم‌های تاریخ فوتبال را ساخت.',
-  },
-  {
-    title: 'مارادونا و شب جادویی 1986',
-    desc: 'داستان دست خدا و فتح جام جهانی.',
-  },
-  {
-    title: 'میلان ساکی چگونه اروپا را فتح کرد؟',
-    desc: 'تحلیل یکی از تاکتیکی‌ترین تیم‌های تاریخ.',
-  },
-]
-const liveMatches = [
-  {
-    home: 'بارسلونا',
-    away: 'رئال مادرید',
-    score: '2 - 1',
-    minute: "5'",
-  },
-  {
-    home: 'لیورپول',
-    away: 'آرسنال',
-    score: '1 - 1',
-    minute: "26'",
-  },
-  {
-    home: 'اینتر',
-    away: 'میلان',
-    score: '0 - 0',
-    minute: "55'",
-  },
-]
 const timeline = [
   {
     year: '1930',
@@ -77,14 +42,6 @@ const timeline = [
     desc: 'اسپانیا فوتبال مالکانه را به اوج رساند.',
   },
 ]
-
-const trending = [
-  'رونالدینیو چگونه فوتبال خیابانی را جهانی کرد؟',
-  'راز موفقیت اسپانیا در جام جهانی 2010',
-  'چرا جام جهانی 1998 تاریخی شد؟',
-  'داستان افسانه‌ای منچستر یونایتد فرگوسن',
-]
-
 const tags = [
   'جام جهانی',
   'مارادونا',
@@ -104,7 +61,7 @@ export default function HomePage() {
   const latestArticles = getArticles()
   .filter(article => !article.featured)
   .slice(0, 6)
-
+const trending = getTrendingArticles()
   const heroArticle = latestArticles[0]
 
   const sideArticles = latestArticles.slice(1, 6)
@@ -125,7 +82,7 @@ const sliderArticles =
     {/* HERO SLIDER */}
     <div className="lg:col-span-2">
 
-      <HeroSlider articles={latestArticles.slice(0, 3)} />
+      <HeroSlider articles={featuredArticles} />
 
     </div>
 
@@ -383,66 +340,9 @@ const sliderArticles =
 
       </section>
 
-{/* TRENDING SECTION */}
-<section className="max-w-7xl mx-auto px-6 py-16">
+{/* TRENDING */}
 
-  <div className="flex items-center justify-between mb-8">
-
-    <h2 className="text-3xl font-black">
-      🔥 داغ‌ترین مطالب
-    </h2>
-
-    <span className="text-sm text-zinc-500">
-      اسکرول کنید →
-    </span>
-
-  </div>
-
-  {/* SCROLL CONTAINER */}
-  <div className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
-
-    {trending.map((item, index) => (
-
-      <div
-        key={index}
-        className="min-w-[300px] snap-start group"
-      >
-
-        <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 hover:border-green-600 transition h-full">
-
-          {/* NUMBER */}
-          <div className="text-green-600 font-black text-sm mb-4">
-            #{index + 1}
-          </div>
-
-          {/* TITLE */}
-          <h3 className="font-bold text-lg leading-8 group-hover:text-green-600 transition">
-            {item}
-          </h3>
-
-          {/* FAKE TAGS */}
-          <div className="mt-4 flex gap-2 flex-wrap">
-
-            <span className="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
-              فوتبال
-            </span>
-
-            <span className="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1 rounded-full">
-              تحلیل
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    ))}
-
-  </div>
-
-</section>
-
+<TrendingSlider articles={trending} />
 
 {/* FEATURED ARTICLES */}
 <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
