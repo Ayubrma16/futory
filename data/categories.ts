@@ -1,27 +1,34 @@
+import { Trophy, Crown, Shield, History, Brain } from "lucide-react"
+
 export const categories = [
   {
     slug: 'world-cup',
     title: 'جام جهانی',
-    color: 'from-green-600 to-green-400',
+    gradient: 'from-green-600 to-green-400',
+    icon: Trophy,
   },
   {
     slug: 'legends',
     title: 'اسطوره‌ها',
-    color: 'from-blue-600 to-blue-400',
+    gradient: 'from-blue-600 to-blue-400',
+    icon: Crown,
   },
   {
     slug: 'clubs',
     title: 'باشگاه‌ها',
-    color: 'from-red-600 to-red-400',
+    gradient: 'from-red-600 to-red-400',
+    icon: Shield,
   },
   {
     slug: 'classic',
     title: 'مسابقات کلاسیک',
-    color: 'from-purple-600 to-purple-400',
+    gradient: 'from-purple-600 to-purple-400',
+    icon: History,
   },
   {
     slug: 'tactics',
     title: 'تاکتیک‌ها',
-    color: 'from-yellow-600 to-yellow-400',
+    gradient: 'from-yellow-600 to-yellow-400',
+    icon: Brain,
   },
 ]

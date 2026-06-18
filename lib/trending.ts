@@ -1,4 +1,4 @@
-import { getArticles } from '@/lib/articles'
+import { getArticles } from '@/data/articles'
 
 export function getTrendingArticles(limit = 10) {
   const articles = getArticles()

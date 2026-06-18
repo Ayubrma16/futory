@@ -14,11 +14,6 @@ export type Article = {
   title: string
   desc: string
   image: string
-  category: string
-  date: string
-  author: string
-  categorySlug: string
-  featured?: boolean
 }
 
 type Props = {
@@ -29,39 +24,45 @@ export default function HeroSlider({ articles }: Props) {
   return (
     <Swiper
       modules={[Autoplay, Pagination]}
-      autoplay={{ delay: 4000 }}
+      autoplay={{ delay: 4500, disableOnInteraction: false }}
       pagination={{ clickable: true }}
-      loop={true}
-      className="rounded-[40px] overflow-hidden"
+      loop
+      className="rounded-[32px] overflow-hidden"
     >
       {articles.map((article) => (
         <SwiperSlide key={article.slug}>
           <Link href={`/articles/${article.slug}`}>
-            <div className="relative h-[420px] group">
+            <div className="relative h-[460px] md:h-[520px] group">
 
               {/* IMAGE */}
               <Image
                 src={article.image}
                 alt={article.title}
                 fill
-                className="object-cover group-hover:scale-105 transition duration-700"
+                priority
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml;base64,..."
+                className="object-cover group-hover:scale-110 transition duration-1000"
               />
 
-              {/* GRADIENT */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              {/* DARK GRADIENT (Improved readability) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              {/* SOFT LIGHT GLOW */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-tr from-green-500/10 via-transparent to-blue-500/10" />
 
               {/* TEXT */}
-              <div className="absolute bottom-0 p-8 text-white">
+              <div className="absolute bottom-0 p-6 md:p-10 text-white max-w-2xl">
 
-                <span className="bg-green-600 text-xs px-3 py-1 rounded-full">
+                <span className="text-xs bg-white/10 px-3 py-1 rounded-full backdrop-blur">
                   مقاله ویژه
                 </span>
 
-                <h2 className="text-3xl font-black mt-4 leading-tight">
+                <h2 className="text-2xl md:text-4xl font-black mt-4 leading-tight">
                   {article.title}
                 </h2>
 
-                <p className="text-zinc-200 mt-3 line-clamp-2">
+                <p className="text-white/80 mt-3 line-clamp-2">
                   {article.desc}
                 </p>
 

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 
 import {
   getArticlesByCategory,
-} from '@/lib/articles'
+} from '@/data/articles'
 
 type Props = {
   params: Promise<{

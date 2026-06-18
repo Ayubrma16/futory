@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+
 
 /* =========================
    DARK MODE VARIABLES
@@ -107,4 +106,19 @@ img {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+}
+
+.dark .prose th,
+.dark .prose td {
+  border-color: #3f3f46;
 }

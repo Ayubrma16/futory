@@ -1,15 +1,25 @@
 import { categories } from '@/data/categories'
-import Link from 'next/link'
-import HeroSlider from '@/components/HeroSlider'
-import Image from 'next/image'
 import { quotes } from '@/data/quotes'
-import TrendingSlider from "@/components/TrendingSlider"
-import { getArticles, getFeaturedArticles } from "@/lib/articles"
-import { getTrendingArticles } from "@/lib/trending"
+import LatestArticles from "@/components/sections/LatestArticles"
+import Link from 'next/link'
+import Image from 'next/image'
+import HeroSlider from '@/components/HeroSlider'
+import TrendingSlider from '@/components/TrendingSlider'
+import TimelineBasic from "@/components/timeline/TimelineBasic";
+import FeaturedArticles from "@/components/FeaturedArticles";
+import {
+  getArticles,
+  getFeaturedArticles,
+} from '@/data/articles'
+
+import { getTrendingArticles } from '@/lib/trending'
+
 import {
   toPersianNumber,
   toPersianDate,
 } from '@/lib/persian'
+
+import { Crown } from 'lucide-react'
 const timeline = [
   {
     year: '1930',
@@ -73,52 +83,104 @@ const sliderArticles =
   return (
     <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white transition-colors duration-300">
 
-{/* HERO */}
-
+{/* HERO — LEVEL 7 */}
 <section className="max-w-7xl mx-auto px-6 py-10">
 
   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
 
     {/* HERO SLIDER */}
     <div className="lg:col-span-2">
-
       <HeroSlider articles={featuredArticles} />
-
     </div>
 
-{/* FOOTBALL QUOTE */}
-<div className="h-full bg-gradient-to-br from-green-700 to-green-500 rounded-[32px] p-8 text-white flex flex-col">
+    {/* QUOTE — LEVEL 7 CLEAN PREMIUM */}
+    <div className="relative h-full rounded-[44px] p-8 text-white overflow-hidden group">
 
-  <div className="flex items-center justify-between mb-8">
+      {/* BASE GRADIENT */}
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-700 via-green-600 to-green-900" />
 
-    <h2 className="text-xl lg:text-2xl font-black">
-      سخن بزرگان فوتبال
-    </h2>
+      {/* SOFT LIGHT ORBS */}
+      <div className="absolute -top-24 -right-24 w-72 h-72 bg-white/10 blur-3xl rounded-full" />
+      <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-black/30 blur-3xl rounded-full" />
 
-    <span className="bg-white/20 px-4 py-2 rounded-full text-sm">
-      LEGENDS
-    </span>
+      {/* SUBTLE LIGHT SWEEP */}
+      <div className="
+        absolute inset-0
+        bg-gradient-to-r from-transparent via-white/10 to-transparent
+        translate-x-[-120%]
+        group-hover:translate-x-[120%]
+        transition-transform duration-[1500ms]
+        rotate-12
+      " />
 
-  </div>
+      {/* CONTENT */}
+      <div className="relative z-10 h-full flex flex-col justify-between">
 
-  <div className="bg-white/10 backdrop-blur rounded-3xl p-8 flex-1 flex flex-col justify-center">
+        {/* HEADER */}
+        <div className="flex items-center justify-between">
 
-    <p className="text-lg lg:text-xl leading-9 lg:leading-10 font-medium">
-      «{randomQuote.text}»
-    </p>
+          <h2 className="text-lg sm:text-xl font-black tracking-tight">
+            سخن بزرگان فوتبال
+          </h2>
 
-    <div className="mt-8 text-2xl font-black">
-      {randomQuote.author}
+          <span className="px-3 py-1 text-[10px] tracking-[0.25em] font-bold rounded-full bg-white/10 border border-white/20">
+            LEGENDS
+          </span>
+
+        </div>
+
+        {/* QUOTE */}
+        <div className="flex-1 flex items-center mt-10">
+
+          <div className="
+            w-full rounded-3xl p-7
+            bg-white/10 backdrop-blur-xl
+            border border-white/20
+            transition-all duration-500
+            group-hover:bg-white/15
+            group-hover:-translate-y-1
+          ">
+
+            {/* ICON */}
+            <div className="mb-5 text-yellow-200">
+              <Crown size={20} />
+            </div>
+
+            {/* TEXT */}
+            <p className="text-xl lg:text-2xl leading-[2] font-medium text-white/95">
+              {randomQuote.text}
+            </p>
+
+            {/* AUTHOR */}
+            <div className="mt-8 flex items-center gap-3">
+
+              <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center">
+                <Crown size={14} />
+              </div>
+
+              <div>
+                <div className="font-black text-lg">
+                  {randomQuote.author}
+                </div>
+                <div className="text-xs text-white/60">
+                  Football Legend
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* BOTTOM LINE */}
+        <div className="h-[1px] bg-white/10 mt-6" />
+
+      </div>
     </div>
 
   </div>
-
-</div>
-
-  </div>
-
 </section>
-
 {/* CATEGORIES */}
 <section className="max-w-7xl mx-auto px-6 py-16">
 
@@ -135,331 +197,117 @@ const sliderArticles =
   </div>
 
   {/* GRID */}
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
 
-    {categories.map((cat) => (
+  {categories.map((cat, i) => {
 
-      <Link
-        key={cat.slug}
-        href={`/articles/category/${cat.slug}`}
-      >
+    const gradients = [
+      "from-emerald-500 to-lime-400",
+      "from-blue-500 to-cyan-400",
+      "from-rose-500 to-pink-400",
+      "from-violet-500 to-indigo-400",
+      "from-amber-500 to-orange-400",
+    ]
 
-        <div className={`group relative overflow-hidden rounded-3xl p-6 text-white bg-gradient-to-br ${cat.color} hover:scale-[1.03] transition` }>
+    const Icon = cat.icon
+    const g = gradients[i % gradients.length]
 
-          {/* glow effect */}
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition" />
+    return (
+      <Link key={cat.slug} href={`/articles/category/${cat.slug}`}>
+        <div className="
+          group relative overflow-hidden rounded-3xl p-6
 
+          bg-gradient-to-b from-zinc-100/80 to-zinc-200/40
+dark:from-zinc-900/60 dark:to-zinc-950/40
+          backdrop-blur-2xl
+
+          border border-white/20 dark:border-white/10
+
+          shadow-md hover:shadow-2xl
+          transition-all duration-500
+
+          hover:-translate-y-2 hover:scale-[1.04]
+        ">
+
+          {/* 🌈 BACKGROUND GRADIENT GLOW */}
+          <div className={`
+            absolute inset-0 opacity-0 group-hover:opacity-20
+            transition duration-500
+            bg-gradient-to-br ${g}
+            blur-2xl
+          `} />
+
+          {/* ✨ LIGHT SWEEP EFFECT */}
+          <div className="
+            absolute inset-[-120%] rotate-45
+            bg-white/10
+            translate-x-[-60%]
+            group-hover:translate-x-[60%]
+            transition-all duration-1000
+          " />
+
+          {/* DARK OVERLAY CONTROL */}
+          <div className="absolute inset-0 bg-black/0 dark:bg-black/20" />
+
+          {/* CONTENT */}
           <div className="relative z-10">
 
-            <h3 className="font-black text-lg mb-2">
+            {/* ICON */}
+            <div className={`
+              w-12 h-12 mb-4 rounded-2xl
+              flex items-center justify-center
+              bg-gradient-to-br ${g}
+              shadow-lg
+              group-hover:scale-110
+              transition
+            `}>
+              <Icon size={22} className="text-white" />
+            </div>
+
+            {/* TITLE */}
+            <h3 className="font-extrabold text-lg text-zinc-900 dark:text-white">
               {cat.title}
             </h3>
 
-            <p className="text-sm opacity-80">
-              مشاهده مقالات
+            {/* SUBTITLE */}
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+              مشاهده مقالات →
             </p>
 
           </div>
 
-        </div>
+          {/* BORDER GLOW */}
+          <div className="
+            absolute inset-0 rounded-3xl
+            border border-transparent
+            group-hover:border-white/30 dark:group-hover:border-white/10
+            transition
+          " />
 
+        </div>
       </Link>
+    )
+  })}
 
-    ))}
-
-  </div>
-
+</div>
 </section>
 
-      {/* LATEST ARTICLES */}
-<section className="bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-200 dark:border-zinc-800 py-28">
+{/* LATEST ARTICLES */}
+      <LatestArticles
+        heroArticle={heroArticle}
+        latestArticles={latestArticles}
+      />
+{/* TIMELINE */}
 
-  <div className="max-w-7xl mx-auto px-6">
-
-    <div className="flex items-center justify-between mb-16">
-
-      <div>
-
-        <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black">
-          آخرین مقالات
-        </h2>
-
-        <p className="text-zinc-500 mt-4 text-lg">
-          جدیدترین داستان‌ها و تحلیل‌های فوتبالی Futory
-        </p>
-
-      </div>
-
-    </div>
-
-    <div className="grid lg:grid-cols-3 gap-8 items-start">
-
-      {/* Hero Article */}
-      <div className="lg:col-span-2">
-
-        <Link href={`/articles/${heroArticle.slug}`}>
-
-          <div className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-[40px] overflow-hidden hover:border-green-600 transition">
-
-            <div className="relative h-[240px] sm:h-[320px] lg:h-[420px]">
-
-              <Image
-                src={heroArticle.image}
-                alt={heroArticle.title}
-                fill
-                className="object-cover"
-              />
-
-            </div>
-
-            <div className="p-10">
-
-              <div className="text-sm text-zinc-500 mb-4">
-                {heroArticle.category}
-              </div>
-
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight mb-6 group-hover:text-green-700 transition">
-                {heroArticle.title}
-              </h3>
-
-              <p className="text-zinc-600 dark:text-zinc-400 leading-9 text-lg">
-                {heroArticle.desc}
-              </p>
-
-            </div>
-
-          </div>
-
-        </Link>
-
-      </div>
-
-      {/* Side Articles */}
-      <div className="space-y-6">
-
-        {latestArticles.slice(1, 5).map((article) => (
-
-          <Link
-            key={article.slug}
-            href={`/articles/${article.slug}`}
-          >
-
-            <div className="group bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 hover:border-green-600 transition cursor-pointer">
-
-              <div className="flex gap-5">
-
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  width={112}
-                  height={112}
-                  className="w-28 h-28 rounded-2xl object-cover"
-                />
-
-                <div>
-
-                  <div className="text-sm text-zinc-500 mb-3">
-                    {article.category}
-                  </div>
-
-                  <h3 className="font-black text-lg leading-8 group-hover:text-green-700 transition">
-                    {article.title}
-                  </h3>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </Link>
-
-        ))}
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-      {/* TIMELINE */}
-      <section className="max-w-6xl mx-auto px-6 py-28">
-
-        <div className="text-center mb-20">
-
-          <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black">
-            تاریخ فوتبال جهان
-          </h2>
-
-          <p className="text-zinc-500 mt-5 text-lg">
-            مهم‌ترین لحظات تاریخ فوتبال از 1930 تا امروز
-          </p>
-
-        </div>
-
-        <div className="relative">
-
-          <div className="absolute right-4 top-0 w-1 h-full bg-green-100 dark:bg-green-950" />
-
-          <div className="space-y-16">
-
-            {timeline.map((item) => (
-
-              <div
-                key={item.year}
-                className="relative pr-16"
-              >
-
-                <div className="absolute right-0 top-2 w-8 h-8 rounded-full bg-green-700 border-4 border-white dark:border-zinc-950 shadow-lg" />
-
-                <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-[32px] p-8 hover:border-green-600 transition">
-
-                  <span className="text-green-700 font-black text-lg">
-                    {toPersianNumber(item.year)}
-                  </span>
-
-                  <h3 className="text-3xl font-black mt-4">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-zinc-600 dark:text-zinc-400 leading-8 mt-5 text-lg">
-                    {item.desc}
-                  </p>
-
-                </div>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </div>
-
-      </section>
+<TimelineBasic timeline={timeline} />
 
 {/* TRENDING */}
 
 <TrendingSlider articles={trending} />
 
 {/* FEATURED ARTICLES */}
-<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
 
-  {/* HEADER */}
-  <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
-
-    <div>
-
-      <span className="text-green-700 font-bold text-sm tracking-widest">
-        داستان‌های ویژه
-      </span>
-
-      <h2 className="text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-3xl sm:text-2xl sm:text-3xl lg:text-4xl lg:text-5xl font-black mt-3 text-zinc-900 dark:text-white leading-tight">
-
-        مقالات منتخب
-
-      </h2>
-
-      <p className="text-zinc-500 dark:text-zinc-400 mt-4 text-base sm:text-lg leading-8 max-w-2xl">
-
-        محبوب‌ترین داستان‌ها و روایت‌های تاریخ فوتبال جهان
-
-      </p>
-
-    </div>
-
-    <button className="w-fit px-6 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 hover:border-green-600 hover:text-green-700 transition font-bold">
-
-      مشاهده همه مقالات
-
-    </button>
-
-  </div>
-
-  {/* GRID */}
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-
-    {featuredArticles.map((article) => (
-
-      <Link
-        key={article.slug}
-        href={`/articles/${article.slug}`}
-        className="group"
-      >
-
-        <article className="h-full overflow-hidden rounded-[32px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-green-600 transition-all duration-500 hover:-translate-y-2">
-
-          {/* IMAGE */}
-          <div className="relative h-60 sm:h-72 overflow-hidden">
-
-            <Image
-              src={article.image}
-              alt={article.title}
-              fill
-              className="object-cover group-hover:scale-110 transition duration-700"
-            />
-
-            {/* OVERLAY */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-            {/* CATEGORY */}
-            <div className="absolute top-5 right-5">
-
-              <span className="bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md text-green-700 text-xs sm:text-sm px-4 py-2 rounded-full font-bold">
-
-                {article.category}
-
-              </span>
-
-            </div>
-
-          </div>
-
-          {/* CONTENT */}
-          <div className="p-6 sm:p-8 flex flex-col h-[260px]">
-
-            <h3 className="text-2xl sm:text-3xl font-black leading-tight mb-5 group-hover:text-green-700 transition line-clamp-2">
-
-              {article.title}
-
-            </h3>
-
-            <p className="text-zinc-600 dark:text-zinc-400 leading-8 flex-1 line-clamp-3">
-
-              {article.desc}
-
-            </p>
-
-            {/* FOOTER */}
-            <div className="flex items-center justify-between mt-8">
-
-              <span className="text-green-700 font-bold">
-
-                مطالعه مقاله
-
-              </span>
-
-              <div className="w-11 h-11 rounded-2xl bg-green-100 dark:bg-green-950/40 flex items-center justify-center text-green-700 group-hover:bg-green-700 group-hover:text-white transition">
-
-                ←
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </article>
-
-      </Link>
-
-    ))}
-
-  </div>
-
-</section>
+<FeaturedArticles featuredArticles={featuredArticles} />
 
 
 

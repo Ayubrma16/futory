@@ -2,7 +2,7 @@
 title: "اسپانیا ۲۰۱۰؛ کامل‌ترین فوتبال مالکانه تاریخ"
 desc: "جام جهانی ۲۰۱۰ آفریقای جنوبی صحنه اوج‌گیری نسلی بود که فوتبال را با فلسفه‌ای جدید متحول کرد."
 image: "/images/spain-2010.jpg"
-category: "جام جهانی (World Cup)"
+category: "جام جهانی"
 categorySlug: "world-cup"
 featured: true
 hero: true

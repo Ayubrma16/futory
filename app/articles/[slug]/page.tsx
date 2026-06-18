@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
-import { getArticles } from '@/lib/articles'
+import { getArticles } from '@/data/articles'
 import ArticleClient from '@/components/ArticleClient'
 import { getReadingTime } from '@/lib/reading-time'
 
@@ -144,7 +144,9 @@ export default async function ArticlePage({ params }: Props) {
           className="object-cover"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+
+<div className="absolute inset-0 bg-black/20" />
 
         <div className="absolute bottom-0 w-full">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-6 sm:pb-10 lg:pb-16">
@@ -158,7 +160,7 @@ export default async function ArticlePage({ params }: Props) {
                 {article.category}
               </Link>
 
-              <h1 className="mt-4 text-2xl sm:text-4xl lg:text-6xl font-black text-white leading-tight">
+              <h1 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
                 {article.title}
               </h1>
 
@@ -166,13 +168,21 @@ export default async function ArticlePage({ params }: Props) {
                 {article.desc}
               </p>
 
-              <div className="mt-5 text-zinc-300 text-xs sm:text-sm flex flex-wrap gap-3">
-                <span>{toPersianDate(article.date)}</span>
-                <span>•</span>
-                <span>{article.author}</span>
-                <span>•</span>
-                <span>{toPersianNumber(readingTime)} دقیقه مطالعه</span>
-              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-zinc-300 text-sm">
+
+  <span>
+    📅 {toPersianDate(article.date)}
+  </span>
+
+  <span>
+    ✍️ {article.author}
+  </span>
+
+  <span>
+    ⏱ {toPersianNumber(readingTime)} دقیقه مطالعه
+  </span>
+
+</div>
 
             </div>
 
@@ -182,18 +192,46 @@ export default async function ArticlePage({ params }: Props) {
       </section>
 
       {/* CONTENT */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-24">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-24">
 
         <article
           className="
-  prose prose-lg lg:prose-xl dark:prose-invert max-w-none
-  prose-p:leading-10
-  prose-p:text-[17px] sm:prose-p:text-[18px]
-  prose-headings:font-black
-  prose-headings:leading-tight
-  prose-img:rounded-2xl
-  prose-p:mb-6
-  text-justify
+prose
+prose-zinc
+dark:prose-invert
+
+max-w-none
+
+prose-p:text-[19px]
+prose-p:leading-[2.2]
+prose-p:text-zinc-700
+dark:prose-p:text-zinc-300
+
+prose-h2:text-3xl
+prose-h2:font-black
+prose-h2:mt-16
+prose-h2:mb-6
+
+prose-h3:text-2xl
+prose-h3:font-bold
+prose-h3:mt-10
+
+prose-strong:text-zinc-900
+dark:prose-strong:text-white
+
+prose-li:text-[18px]
+prose-li:leading-9
+
+prose-ul:my-8
+prose-ol:my-8
+
+prose-table:block
+prose-table:overflow-x-auto
+
+prose-img:rounded-3xl
+prose-img:shadow-xl
+
+text-justify
 "
           dangerouslySetInnerHTML={{
             __html: contentHtml,
@@ -215,7 +253,12 @@ export default async function ArticlePage({ params }: Props) {
             {article.faq.map((item, i) => (
               <div
                 key={i}
-                className="border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5"
+                className="border border-zinc-200 dark:border-zinc-800rounded-3xl
+p-6
+bg-zinc-50
+dark:bg-zinc-900
+hover:shadow-lg
+transition"
               >
                 <h3 className="font-bold mb-2">
                   {item.question}
@@ -247,15 +290,36 @@ export default async function ArticlePage({ params }: Props) {
               {relatedArticles.map((item) => (
                 <Link key={item.slug} href={`/articles/${item.slug}`}>
 
-                  <article className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl overflow-hidden hover:shadow-lg transition">
+                  <article className="
+group
+overflow-hidden
+rounded-3xl
+border
+border-zinc-200
+dark:border-zinc-800
+
+bg-white
+dark:bg-zinc-900
+
+hover:-translate-y-2
+hover:shadow-2xl
+
+transition-all
+duration-500
+">
 
                     <div className="relative h-44 sm:h-52">
                       <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover"
-                      />
+  src={item.image}
+  alt={item.title}
+  fill
+  className="
+    object-cover
+    group-hover:scale-110
+    transition
+    duration-700
+  "
+/>
                     </div>
 
                     <div className="p-5 sm:p-6">

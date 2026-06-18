@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getArticles } from '@/lib/articles'
+import { getArticles } from '@/data/articles'
 import ArticlesSearch from '@/components/ArticlesSearch'
 import {
   toPersianNumber,

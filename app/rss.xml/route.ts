@@ -61,7 +61,7 @@ ${article.title}
 </title>
 
 <link>
-https://futory.com/articles/${article.slug}
+https://futory.ir/articles/${article.slug}
 </link>
 
 <description>

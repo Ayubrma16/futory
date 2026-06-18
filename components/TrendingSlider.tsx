@@ -1,14 +1,10 @@
 "use client"
 
-import { useRef } from "react"
 import Link from "next/link"
-import Image from "next/image"
-
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay, Navigation } from "swiper/modules"
+import { Autoplay, Keyboard, A11y } from "swiper/modules"
 
 import "swiper/css"
-import "swiper/css/navigation"
 
 type Article = {
   slug: string
@@ -17,91 +13,116 @@ type Article = {
   image: string
   views?: number
   date?: string
+  category?: string
 }
 
 type Props = {
   articles: Article[]
 }
 
-export default function TrendingSlider({ articles }: Props) {
-  const prevRef = useRef<HTMLButtonElement | null>(null)
-  const nextRef = useRef<HTMLButtonElement | null>(null)
-
+export default function TrendingFootballArticles({ articles }: Props) {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-16 relative">
+    <section className="max-w-7xl mx-auto px-6 py-16 bg-white dark:bg-[#05080D] relative">
 
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-black">🔥 داغ‌ترین مقالات</h2>
-        <span className="text-sm text-zinc-500">بر اساس بازدید</span>
+      <div className="flex items-end justify-between mb-10">
+        <div>
+          <h2 className="text-3xl font-black text-zinc-900 dark:text-white">
+            🔥 داغ‌ترین مقالات فوتبال
+          </h2>
+          <p className="text-zinc-500 text-sm mt-2">
+            محبوب‌ترین و پربازدیدترین مطالب فوتبالی
+          </p>
+        </div>
       </div>
 
-      {/* ARROWS */}
-      <button
-        ref={prevRef}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full border bg-white dark:bg-zinc-900"
-      >
-        ←
-      </button>
-
-      <button
-        ref={nextRef}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full border bg-white dark:bg-zinc-900"
-      >
-        →
-      </button>
-
-      {/* SWIPER */}
       <Swiper
-        modules={[Autoplay, Navigation]}
-        loop={true}
+        modules={[Autoplay, Keyboard, A11y]}
+        loop
+        keyboard={{ enabled: true }}
         autoplay={{
-          delay: 2500,
+          delay: 2800,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
+        spaceBetween={18}
+        slidesPerView={1}
+        breakpoints={{
+          640: { slidesPerView: 1.2 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
         }}
-onBeforeInit={(swiper) => {
-  const navigation = swiper.params.navigation
-
-  if (navigation && typeof navigation === "object") {
-    navigation.prevEl = prevRef.current
-    navigation.nextEl = nextRef.current
-  }
-}}
       >
-        {articles.map((article, index) => (
-          <SwiperSlide key={article.slug}>
-            <Link href={`/articles/${article.slug}`}>
-              <div
-                className={`p-6 rounded-3xl border transition ${
-                  index === 0
-                    ? "border-green-500 shadow-md scale-[1.03]"
-                    : "border-zinc-200 dark:border-zinc-800"
-                }`}
-              >
-                <div className="text-green-600 font-black text-sm mb-3">
-                  🔥 {article.views || 0} بازدید
-                </div>
+        {articles
+          .sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+          .map((article, index) => {
 
-                <h3 className="font-bold text-lg leading-8">
-                  {article.title}
-                </h3>
+            const isTop = index === 0
+            const isPopular = (article.views ?? 0) > 3000
 
-                <p className="text-sm text-zinc-500 mt-3 line-clamp-2">
-                  {article.desc}
-                </p>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
+            return (
+              <SwiperSlide key={article.slug}>
+                <Link href={`/articles/${article.slug}`}>
+                  <div className={`
+                    group relative h-full rounded-2xl p-5
+                    border transition-all duration-300
+
+                    bg-white dark:bg-[#0B1220]
+                    hover:-translate-y-2 hover:shadow-xl
+
+                    ${isTop
+                      ? "border-emerald-500/70"
+                      : "border-zinc-200 dark:border-white/10"}
+                  `}>
+
+                    {/* TOP BAR */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-emerald-500 font-bold text-xs tracking-[0.25em]">
+                        {article.category || "مقاله فوتبالی"}
+                      </span>
+
+                      <span className={`
+                        text-xs font-bold
+                        ${isPopular ? "text-amber-500" : "text-zinc-500"}
+                      `}>
+                        📊 محبوب
+                      </span>
+                    </div>
+
+                    {/* TITLE */}
+                    <h3 className="text-lg font-black leading-7 text-zinc-900 dark:text-white group-hover:text-emerald-400 transition line-clamp-2">
+                      {article.title}
+                    </h3>
+
+                    {/* DESC */}
+                    <p className="text-sm text-zinc-500 mt-3 leading-6 line-clamp-2">
+                      {article.desc}
+                    </p>
+
+                    {/* META */}
+                    <div className="flex items-center justify-between mt-5 text-xs text-zinc-500">
+                      <span className="text-emerald-500 font-bold">
+                        👁 {article.views ?? 0} بازدید
+                      </span>
+
+                      <span>⏱ ۲ دقیقه مطالعه</span>
+                    </div>
+
+                    {/* PROGRESS BAR */}
+                    <div className="mt-4 h-[3px] w-full bg-zinc-200 dark:bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-full w-1/2 bg-emerald-500 group-hover:w-full transition-all duration-500" />
+                    </div>
+
+                  </div>
+                </Link>
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
 
-      {/* EDGE BLUR */}
-      <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white dark:from-zinc-950 pointer-events-none" />
-      <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white dark:from-zinc-950 pointer-events-none" />
+      {/* EDGE FADE */}
+      <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-white dark:from-[#05080D] pointer-events-none" />
+      <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-white dark:from-[#05080D] pointer-events-none" />
 
     </section>
   )

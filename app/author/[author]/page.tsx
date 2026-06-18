@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getArticles } from '@/lib/articles'
+import { getArticles } from '@/data/articles'
 
 type Props = {
   params: Promise<{
